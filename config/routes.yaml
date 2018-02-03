@@ -1,0 +1,18 @@
+index:
+    path: /
+    controller: App\Controller\DefaultController::index
+profile:
+    path: /profile
+    controller: App\Controller\ProfileController::index
+business:
+    path: /business
+    controller: App\Controller\BusinessController::index
+statistics:
+    path: /statistics
+    controller: App\Controller\StatisticsController::index
+codes:
+    path: /codes
+    controller: App\Controller\CodesController::index
+payment:
+    path: /payment
+    controller: App\Controller\PaymentController::index
