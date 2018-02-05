@@ -1,0 +1,47 @@
+{% extends 'master/dashboard.html.twig' %}
+
+{% set title = 'Perfil' %}
+
+{% set section_icon = 'fa-building' %}
+
+{% set section_name = 'Mis negocios' %}
+
+{% block section_body %}
+    <section class="mb-4">
+        <h2 class="font-weight-light">Paso 1 de 3</h2>
+        <h4 class="font-weight-light text-muted">Ingresa la información general de tu negocio</h4>
+        <form action="" class="mt-5">
+            <div class="form-row mb-3">
+                <div class="col-6">
+                    <input type="text" name="name" id="txtName" class="form-control" placeholder="Nombre del negocio">
+                </div>
+            </div>
+            <div class="form-row mb-3">
+                <div class="col-6">
+                    <input type="text" name="branch" id="txtBranch" class="form-control" placeholder="Sucursal (opcional)">
+                </div>
+            </div>
+            <div class="form-row mb-3">
+                <div class="col-6">
+                    <select name="category" id="txtCategory" class="form-control">
+                        <option value="">Restaurante</option>
+                        <option value=""></option>
+                        <option value=""></option>
+                        <option value=""></option>
+                        <option value=""></option>
+                        <option value=""></option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-row mb-3">
+                <div class="col-6">
+                    <input type="text" name="subcategory" id="txtSubcategory" class="form-control" placeholder="Subcategoría (e.g. comida italiana, estética, etc)">
+                </div>
+            </div>
+            <div class="form-row justify-content-end">
+                <button type="button" class="btn btn-link text-dark">Cancelar</button>
+                <button type="button" class="btn btn-danger" onclick="location.href = '/business/register/step-2';">Guardar y Continuar</button>
+            </div>
+        </form>
+    </section>
+{% endblock %}

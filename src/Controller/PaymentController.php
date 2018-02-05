@@ -8,12 +8,9 @@ use Symfony\Component\HttpFoundation\Response;
 
 class PaymentController extends Controller
 {
-    /**
-     * @Route("/payment", name="payment")
-     */
     public function index()
     {
         // replace this line with your own code!
-        return $this->render('@Maker/demoPage.html.twig', [ 'path' => str_replace($this->getParameter('kernel.project_dir').'/', '', __FILE__) ]);
+        return $this->render('payment.html.twig');
     }
 }

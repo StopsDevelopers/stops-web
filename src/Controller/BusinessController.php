@@ -8,12 +8,23 @@ use Symfony\Component\HttpFoundation\Response;
 
 class BusinessController extends Controller
 {
-    /**
-     * @Route("/business", name="business")
-     */
     public function index()
     {
         // replace this line with your own code!
-        return $this->render('@Maker/demoPage.html.twig', [ 'path' => str_replace($this->getParameter('kernel.project_dir').'/', '', __FILE__) ]);
+        return $this->render('business.html.twig');
+    }
+
+    public function register($number){
+        switch ($number){
+            case 1:
+                return $this->render('business-step-one.html.twig');
+                break;
+            case 2:
+                return $this->render('business-step-two.html.twig');
+                break;
+            case 3:
+                return $this->render('business-step-three.html.twig');
+                break;
+        }
     }
 }

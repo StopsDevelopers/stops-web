@@ -7,6 +7,11 @@ profile:
 business:
     path: /business
     controller: App\Controller\BusinessController::index
+business_register:
+    path: /business/register/step-{number}
+    controller: App\Controller\BusinessController::register
+    requirements:
+        number: '[123]'
 statistics:
     path: /statistics
     controller: App\Controller\StatisticsController::index
