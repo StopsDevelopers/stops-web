@@ -1,11 +1,11 @@
 import 'bootstrap';
 
 import Vue from 'vue';
-import TodoItem from './components/todo-item';
 import DashboardHeader from './components/dashboard-header';
+import DashboardView from './components/dashboard-view';
 
-Vue.component('todo-item', TodoItem);
 Vue.component('dashboard-header', DashboardHeader);
+Vue.component('dashboard-view', DashboardView);
 
 var app = new Vue({
     delimiters: ['${', '}'],

@@ -1,7 +1,7 @@
 <template>
     <nav class="navbar navbar-dark bg-dark">
-        <a class="navbar-brand" v-bind:href="logo.url">
-            <img v-bind:src="logo.img" width="40" height="40" class="d-inline-block align-top rounded" alt="">
+        <a class="navbar-brand" :href="logoUrl">
+            <img width="40" height="40" class="d-inline-block align-top rounded" :src="logoSrc" :alt="logoAlt">
             <h2 class="d-inline-block">Stops</h2>
         </a>
         <ul class="nav justify-content-end">
@@ -11,19 +11,13 @@
 </template>
 
 <script>
-    module.exports = {
-        data: function () {
-            return {
-                logo: {
-                    url: '/business',
-                    img: 'images/logotipo.jpeg'
-                }
-            }
-        },
+    export default {
+        name: "dashboard-header",
         props: {
-            isSessionStart: {
-                type: Boolean
-            }
+            logoSrc: String,
+            logoAlt: String,
+            logoUrl: String,
+            isSessionStart: Boolean
         }
     }
 </script>
