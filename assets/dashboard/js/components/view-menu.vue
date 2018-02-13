@@ -6,8 +6,8 @@
                     v-bind:id="section.id"
                     v-bind:icon="section.icon"
                     v-bind:url="section.url"
-                    v-bind:text="section.text">
-
+                    v-bind:text="section.text"
+                    :key="section.id">
             </menu-item>
         </div>
     </div>
