@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -47,6 +49,7 @@ class User
      */
     public function __construct()
     {
+        $this->stops = new ArrayCollection();
     }
 
     /**
@@ -178,4 +181,18 @@ class User
     {
         $this->profile = $profile;
     }
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Stop", mappedBy="user")
+     */
+    private $stops;
+
+    /**
+     * @return Collection|Stop[]
+     */
+    public function getStops()
+    {
+        return $this->stops;
+    }
+
 }

@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -176,6 +178,27 @@ class Address
     public function setUser(User $user)
     {
         $this->user = $user;
+    }
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Branch", inversedBy="address")
+     */
+    private $branch;
+
+    /**
+     * @return mixed
+     */
+    public function getBranch(): Branch
+    {
+        return $this->branch;
+    }
+
+    /**
+     * @param mixed $branch
+     */
+    public function setBranch(Branch $branch)
+    {
+        $this->branch = $branch;
     }
 
 

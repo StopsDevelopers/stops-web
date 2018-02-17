@@ -116,5 +116,26 @@ class Profile
         $this->user = $user;
     }
 
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Branch", inversedBy="profile")
+     */
+    private $branch;
+
+    /**
+     * @return mixed
+     */
+    public function getBranch(): Branch
+    {
+        return $this->branch;
+    }
+
+    /**
+     * @param mixed $branch
+     */
+    public function setBranch(Branch $branch)
+    {
+        $this->branch = $branch;
+    }
+
 
 }
