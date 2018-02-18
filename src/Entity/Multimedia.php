@@ -149,4 +149,46 @@ class Multimedia
     {
         $this->multimediaType = $multimediaType;
     }
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Promotion", inversedBy="multimedia")
+     */
+    private $promotion;
+
+    /**
+     * @return mixed
+     */
+    public function getPromotion(): Promotion
+    {
+        return $this->promotion;
+    }
+
+    /**
+     * @param mixed $promotion
+     */
+    public function setPromotion(Promotion $promotion)
+    {
+        $this->promotion = $promotion;
+    }
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Coupon", inversedBy="multimedia")
+     */
+    private $coupon;
+
+    /**
+     * @return mixed
+     */
+    public function getCoupon(): Coupon
+    {
+        return $this->coupon;
+    }
+
+    /**
+     * @param mixed $coupon
+     */
+    public function setCoupon(Coupon $coupon)
+    {
+        $this->coupon = $coupon;
+    }
 }

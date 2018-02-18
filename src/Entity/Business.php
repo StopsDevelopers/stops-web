@@ -55,6 +55,7 @@ class Business
     {
         $this->stops =  new ArrayCollection();
         $this->awards = new ArrayCollection();
+        $this->promotions = new ArrayCollection();
     }
 
     /**
@@ -198,5 +199,18 @@ class Business
     public function getAwards()
     {
         return $this->awards;
+    }
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Promotion", mappedBy="business")
+     */
+    private $promotions;
+
+    /**
+     * @return Collection|Promotion[]
+     */
+    public function getPromotions()
+    {
+        return $this->promotions;
     }
 }

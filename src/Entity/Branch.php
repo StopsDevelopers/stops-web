@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpKernel\Tests\Controller;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\BranchRepository")
@@ -49,6 +50,9 @@ class Branch
     public function __construct()
     {
         $this->albums = new ArrayCollection();
+        $this->coupons = new ArrayCollection();
+        $this->visits = new ArrayCollection();
+        $this->contacts = new ArrayCollection();
     }
 
     /**
@@ -234,5 +238,44 @@ class Branch
     public function getAlbums()
     {
         return $this->albums;
+    }
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Coupon", mappedBy="branch")
+     */
+    private $coupons;
+
+    /**
+     * @return Collection|Coupon[]
+     */
+    public function getCoupons()
+    {
+        return $this->coupons;
+    }
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Visit", mappedBy="branch")
+     */
+    private $visits;
+
+    /**
+     * @return Collection|Visit[]
+     */
+    public function getVisits()
+    {
+        return $this->visits;
+    }
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Contact", mappedBy="branch")
+     */
+    private $contacts;
+
+    /**
+     * @return Collection|Contact[]
+     */
+    public function getContacts()
+    {
+        return $this->contacts;
     }
 }

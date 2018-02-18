@@ -7,9 +7,9 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\AwardRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\PromotionRepository")
  */
-class Award
+class Promotion
 {
     /**
      * @ORM\Id
@@ -29,14 +29,9 @@ class Award
     private $description;
 
     /**
-     * @ORM\Column(type="string", name="type", columnDefinition="enum('BONO_BIENVENIDA', 'BONO_CLIENTE_FRCUENTE', 'BONO_FAVORITO')")
+     * @ORM\Column(type="smallint")
      */
-    private $type;
-
-    /**
-     * @ORM\Column(type="text")
-     */
-    private $restriction;
+    private $price;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
@@ -49,11 +44,16 @@ class Award
     private $deadline;
 
     /**
-     * Award constructor.
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $restriction;
+
+    /**
+     * Promotion constructor.
      */
     public function __construct()
     {
-        $this->claimedAwards = new ArrayCollection();
+        $this->claimedPromotions = new ArrayCollection();
     }
 
     /**
@@ -99,33 +99,17 @@ class Award
     /**
      * @return mixed
      */
-    public function getType()
+    public function getPrice()
     {
-        return $this->type;
+        return $this->price;
     }
 
     /**
-     * @param mixed $type
+     * @param mixed $price
      */
-    public function setType($type)
+    public function setPrice($price)
     {
-        $this->type = $type;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getRestriction()
-    {
-        return $this->restriction;
-    }
-
-    /**
-     * @param mixed $restriction
-     */
-    public function setRestriction($restriction)
-    {
-        $this->restriction = $restriction;
+        $this->price = $price;
     }
 
     /**
@@ -161,14 +145,30 @@ class Award
     }
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Business", inversedBy="awards")
+     * @return mixed
+     */
+    public function getRestriction()
+    {
+        return $this->restriction;
+    }
+
+    /**
+     * @param mixed $restriction
+     */
+    public function setRestriction($restriction)
+    {
+        $this->restriction = $restriction;
+    }
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Business", inversedBy="promotions")
      */
     private $business;
 
     /**
      * @return mixed
      */
-    public function getBusiness(): Business
+    public function getBusiness(): Promotion
     {
         return $this->business;
     }
@@ -176,21 +176,42 @@ class Award
     /**
      * @param mixed $business
      */
-    public function setBusiness(Business $business)
+    public function setBusiness(Promotion $business)
     {
         $this->business = $business;
     }
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\ClaimAward", mappedBy="award")
+     * @ORM\OneToOne(targetEntity="App\Entity\Multimedia", inversedBy="promotion")
      */
-    private $claimedAwards;
+    private $multimedia;
 
     /**
-     * @return Collection|ClaimAward[]
+     * @return mixed
      */
-    public function getClaimedAwards()
+    public function getMultimedia(): Multimedia
     {
-        return $this->claimedAwards;
+        return $this->multimedia;
+    }
+
+    /**
+     * @param mixed $multimedia
+     */
+    public function setMultimedia(Multimedia $multimedia)
+    {
+        $this->multimedia = $multimedia;
+    }
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\ClaimPromotion", mappedBy="promotion")
+     */
+    private $claimedPromotions;
+
+    /**
+     * @return Collection|ClaimPromotion[]
+     */
+    public function getClaimedPromotions()
+    {
+        return $this->claimedPromotions;
     }
 }

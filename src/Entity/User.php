@@ -50,6 +50,10 @@ class User
     public function __construct()
     {
         $this->stops = new ArrayCollection();
+        $this->claimedAwards = new ArrayCollection();
+        $this->claimedPromotions = new ArrayCollection();
+        $this->claimedCoupons = new ArrayCollection();
+        $this->visits = new ArrayCollection();
     }
 
     /**
@@ -195,4 +199,55 @@ class User
         return $this->stops;
     }
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\ClaimAward", mappedBy="user")
+     */
+    private $claimedAwards;
+
+    /**
+     * @return Collection|ClaimAward[]
+     */
+    public function getClaimedAwards()
+    {
+        return $this->claimedAwards;
+    }
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\ClaimPromotion", mappedBy="user")
+     */
+    private $claimedPromotions;
+
+    /**
+     * @return Collection|ClaimPromotion[]
+     */
+    public function getClaimedPromotions()
+    {
+        return $this->claimedPromotions;
+    }
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\ClaimCoupon", mappedBy="user")
+     */
+    private $claimedCoupons;
+
+    /**
+     * @return Collection|ClaimCoupon[]
+     */
+    public function getClaimedCoupons()
+    {
+        return $this->claimedCoupons;
+    }
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Visit", mappedBy="user")
+     */
+    private $visits;
+
+    /**
+     * @return Collection|Visit[]
+     */
+    public function getVisits()
+    {
+        return $this->visits;
+    }
 }
