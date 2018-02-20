@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -37,6 +39,12 @@ class Profile
      */
     public function __construct()
     {
+        $this->followers = new ArrayCollection();
+        $this->posts = new ArrayCollection();
+        $this->sharedPosts = new ArrayCollection();
+        $this->comments = new ArrayCollection();
+        $this->postReactions = new ArrayCollection();
+        $this->commentReactions = new ArrayCollection();
     }
 
     /**
@@ -137,5 +145,124 @@ class Profile
         $this->branch = $branch;
     }
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Follow", mappedBy="profile")
+     */
+    private $followers;
 
+
+    /**
+     * @return Collection|Follow[]
+     */
+    public function getFollowers()
+    {
+        return $this->followers;
+    }
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Post", mappedBy="profile")
+     */
+    private $posts;
+
+    /**
+     * @return Collection|Post[]
+     */
+    public function getPosts()
+    {
+        return $this->posts;
+    }
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Share", mappedBy="profile")
+     */
+    private $sharedPosts;
+
+    /**
+     * @return Collection|Share[]
+     */
+    public function getSharedPosts()
+    {
+        return $this->sharedPosts;
+    }
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="profile")
+     */
+    private $comments;
+
+    /**
+     * @return Collection|Comment[]
+     */
+    public function getComments()
+    {
+        return $this->comments;
+    }
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\PostReaction", mappedBy="profile")
+     */
+    private $postReactions;
+
+    /**
+     * @return Collection|PostReaction[]
+     */
+    public function getPostReactions()
+    {
+        return $this->postReactions;
+    }
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\CommentReaction", mappedBy="profile")
+     */
+    private $commentReactions;
+
+    /**
+     * @return Collection|CommentReaction[]
+     */
+    public function getCommentReactions()
+    {
+        return $this->commentReactions;
+    }
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Notification", inversedBy="profileAutor")
+     */
+    private $notificationAutor;
+
+    /**
+     * @return mixed
+     */
+    public function getNotificationAutor(): Notification
+    {
+        return $this->notificationAutor;
+    }
+
+    /**
+     * @param mixed $notificationAutor
+     */
+    public function setNotificationAutor(Notification $notificationAutor)
+    {
+        $this->notificationAutor = $notificationAutor;
+    }
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Notification", inversedBy="profileDestination")
+     */
+    private $notificationDestination;
+
+    /**
+     * @return mixed
+     */
+    public function getNotificationDestination(): Notification
+    {
+        return $this->notificationDestination;
+    }
+
+    /**
+     * @param mixed $notificationDestination
+     */
+    public function setNotificationDestination(Notification $notificationDestination)
+    {
+        $this->notificationDestination = $notificationDestination;
+    }
 }

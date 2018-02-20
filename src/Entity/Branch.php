@@ -53,6 +53,7 @@ class Branch
         $this->coupons = new ArrayCollection();
         $this->visits = new ArrayCollection();
         $this->contacts = new ArrayCollection();
+        $this->topics = new ArrayCollection();
     }
 
     /**
@@ -277,5 +278,18 @@ class Branch
     public function getContacts()
     {
         return $this->contacts;
+    }
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Topic", mappedBy="branch")
+     */
+    private $topics;
+
+    /**
+     * @return Collection|Topic[]
+     */
+    public function getTopics()
+    {
+        return $this->topics;
     }
 }

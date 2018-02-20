@@ -191,4 +191,25 @@ class Multimedia
     {
         $this->coupon = $coupon;
     }
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Post", inversedBy="multimedia")
+     */
+    private $post;
+
+    /**
+     * @return mixed
+     */
+    public function getPost(): Post
+    {
+        return $this->post;
+    }
+
+    /**
+     * @param mixed $post
+     */
+    public function setPost(Post $post)
+    {
+        $this->post = $post;
+    }
 }

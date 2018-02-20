@@ -54,6 +54,7 @@ class User
         $this->claimedPromotions = new ArrayCollection();
         $this->claimedCoupons = new ArrayCollection();
         $this->visits = new ArrayCollection();
+        $this->followers = new ArrayCollection();
     }
 
     /**
@@ -249,5 +250,18 @@ class User
     public function getVisits()
     {
         return $this->visits;
+    }
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Follow", mappedBy="user")
+     */
+    private $followers;
+
+    /**
+     * @return Collection|Follow[]
+     */
+    public function getFollowers()
+    {
+        return $this->followers;
     }
 }
