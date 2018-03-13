@@ -1,5 +1,5 @@
 <template>
-    <div class="vcol-9">
+    <div class="col-9">
         <main class="p-3">
             <h3 class="mb-4">
                 <i class="fa fa-2x" aria-hidden="true" :class="sectionIcon"></i>

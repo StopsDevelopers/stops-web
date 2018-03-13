@@ -7,23 +7,23 @@
 {% set section_name = 'Mis negocios' %}
 
 {% block section_body %}
-    <section class="mb-4">
-        <h2 class="font-weight-light">Paso 1 de 3</h2>
-        <h4 class="font-weight-light text-muted">Ingresa la información general de tu negocio</h4>
-        <form action="" class="mt-5">
+    <business-register
+            step="1"
+            info="Ingresa la información general de tu negocio">
+        <form  action="" class="mt-5">
             <div class="form-row mb-3">
                 <div class="col-6">
-                    <input type="text" name="name" id="txtName" class="form-control" placeholder="Nombre del negocio">
+                    <input type="text" name="name" id="txtName" class="form-control" placeholder="Nombre del negocio" v-model="business.register.stepOne.name">
                 </div>
             </div>
             <div class="form-row mb-3">
                 <div class="col-6">
-                    <input type="text" name="branch" id="txtBranch" class="form-control" placeholder="Sucursal (opcional)">
+                    <input type="text" name="branch" id="txtBranch" class="form-control" placeholder="Sucursal (opcional)" v-model="business.register.stepOne.branch">
                 </div>
             </div>
             <div class="form-row mb-3">
                 <div class="col-6">
-                    <select name="category" id="txtCategory" class="form-control">
+                    <select name="category" id="txtCategory" class="form-control" v-model="business.register.stepOne.category">
                         <option value="">Restaurante</option>
                         <option value=""></option>
                         <option value=""></option>
@@ -35,7 +35,7 @@
             </div>
             <div class="form-row mb-3">
                 <div class="col-6">
-                    <input type="text" name="subcategory" id="txtSubcategory" class="form-control" placeholder="Subcategoría (e.g. comida italiana, estética, etc)">
+                    <input type="text" name="subcategory" id="txtSubcategory" class="form-control" placeholder="Subcategoría (e.g. comida italiana, estética, etc)" v-model="business.register.stepOne.subcategory">
                 </div>
             </div>
             <div class="form-row justify-content-end">
@@ -43,5 +43,5 @@
                 <button type="button" class="btn btn-danger" onclick="location.href = '/business/register/step-2';">Guardar y Continuar</button>
             </div>
         </form>
-    </section>
+    </business-register>
 {% endblock %}

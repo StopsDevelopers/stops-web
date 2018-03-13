@@ -5,7 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Stops - {{ title }}</title>
+    <title>Stops</title>
     <link rel="stylesheet" href="{{ asset('build/dashboard/css/dashboard.css') }}">
 </head>
 <body>
@@ -15,18 +15,14 @@
                 logo-src="{{ asset('images/logotipo.jpeg') }}"
                 logo-alt="Logo de Stops."
                 logo-url="/">
-
         </dashboard-header>
 
         {# CONTENIDO #}
         <dashboard-view
-                section-icon="{{ section_icon }}"
-                section-name="{{ section_name }}">
-            {% block section_body %}
-            {% endblock %}
+                section-icon="fa-plus"
+                section-name="Hola">
         </dashboard-view>
     </div>
     <script src="{{ asset('build/dashboard/js/dashboard.js') }}"></script>
-    {% block scripts %}{% endblock %}
 </body>
 </html>

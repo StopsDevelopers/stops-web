@@ -1,26 +1,22 @@
 <template>
     <div class="col-3">
         <div class="list-group">
-            <menu-item
+            <router-link
                     v-for="section in sections"
-                    v-bind:id="section.id"
-                    v-bind:icon="section.icon"
-                    v-bind:url="section.url"
-                    v-bind:text="section.text"
-                    :key="section.id">
-            </menu-item>
+                    v-bind:key="section.id"
+                    v-bind:to="section.url"
+                    tag="button"
+                    class="list-group-item list-group-item-action">
+                <i class="fa" aria-hidden="true" :class="section.icon"></i>
+                {{ section.text }}
+            </router-link>
         </div>
     </div>
 </template>
 
 <script>
-    import MenuItem from './menu-item';
-
     export default {
         name: "view-menu",
-        components: {
-            MenuItem
-        },
         data: function () {
             return{
                 sections: [
