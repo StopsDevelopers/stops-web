@@ -13,16 +13,12 @@ class CategoryRepository extends ServiceEntityRepository
         parent::__construct($registry, Category::class);
     }
 
-    /*
-    public function findBySomething($value)
-    {
-        return $this->createQueryBuilder('c')
-            ->where('c.something = :value')->setParameter('value', $value)
-            ->orderBy('c.id', 'ASC')
-            ->setMaxResults(10)
+    public function getCategories(){
+        $results = $this->createQueryBuilder('c')
+            ->select('c.id, c.name')
             ->getQuery()
-            ->getResult()
-        ;
+            ->getResult();
+
+        return $results;
     }
-    */
 }

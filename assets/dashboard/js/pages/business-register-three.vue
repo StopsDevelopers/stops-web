@@ -5,7 +5,7 @@
                 <div class="col-7 border border-dark p-2">
                     <div class="form-check m-0">
                         <label for="radCard" class="form-check-label d-flex align-items-center justify-content-between">
-                            <input type="radio" name="method" id="radCard" class="form-check-input my-0">
+                            <input type="radio" name="method" id="radCard" class="form-check-input my-0" v-model="method" value="PAGO_CON_TARJETA">
                             Tarjeta de crédito / débito / prepagada
                             <div class="images">
                                 <a href="http://www.credit-card-logos.com/">
@@ -27,14 +27,14 @@
                 <div class="col-7 border border-dark p-2">
                     <div class="form-check m-0">
                         <label for="radAccount" class="form-check-label d-flex align-items-center justify-content-between">
-                            <input type="radio" name="method" id="radAccount" class="form-check-input my-0">
+                            <input type="radio" name="method" id="radAccount" class="form-check-input my-0" v-model="method" value="PAGO_CON_PAYPAL">
                             Usar cuenta existente / crear cuenta de
                             <img src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/PP_logo_h_100x26.png" alt="PayPal Logo" height="22" class="mr-4">
                         </label>
                     </div>
                 </div>
             </div>
-            <div id="card" class="mt-5 mb-3">
+            <div id="card" class="mt-5 mb-3" v-if="method == 'PAGO_CON_TARJETA'">
                 <div class="form-row mb-3">
                     <div class="col-4">
                         <input type="text" name="firstName" id="txtFirstName" class="form-control" placeholder="Nombre">
@@ -77,7 +77,7 @@
 
                 </div>
             </div>
-            <div id="account" class="mt-5 mb-3">
+            <div id="account" class="mt-5 mb-3" v-else-if="method == 'PAGO_CON_PAYPAL'">
                 <div class="form-row">
                     <div class="col-8 d-flex justify-content-center">
                         <button class="btn btn-link btn-lg">
@@ -100,7 +100,6 @@
             <div class="form-row justify-content-end">
                 <button type="button" class="btn btn-link text-dark">Cancelar</button>
                 <router-link to="business" tag="button" class="btn btn-danger disabled">Guardar y Continuar</router-link>
-                <!--<button type="button" class="btn btn-danger disabled">Guardar y Continuar</button>-->
             </div>
         </form>
     </business-register>
@@ -113,6 +112,12 @@
         name: "business-register-three",
         components: {
             BusinessRegister
+        },
+        data(){
+            return{
+                method: String,
+                conditions: Boolean
+            }
         }
     }
 </script>

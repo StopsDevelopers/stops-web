@@ -3,7 +3,7 @@
         <form  action="" class="mt-5">
             <div class="form-row mb-3">
                 <div class="col-6">
-                    <input type="text" name="name" id="txtName" class="form-control" placeholder="Nombre del negocio" v-model="$root.$data.business.register.name">
+                    <input type="text" name="name" id="txtName" class="form-control" placeholder="Nombre del negocio" v-model="$root.$data.business.register.businessName">
                 </div>
             </div>
             <div class="form-row mb-3">
@@ -14,12 +14,8 @@
             <div class="form-row mb-3">
                 <div class="col-6">
                     <select name="category" id="txtCategory" class="form-control" v-model="$root.$data.business.register.category">
-                        <option value="">Restaurante</option>
-                        <option value=""></option>
-                        <option value=""></option>
-                        <option value=""></option>
-                        <option value=""></option>
-                        <option value=""></option>
+                        <option value="0" hidden selected>Categoria</option>
+                        <option v-for="category in categories" :value="category.id">{{ category.name }}</option>
                     </select>
                 </div>
             </div>
@@ -44,6 +40,21 @@
         components: {
             BusinessRegister
         },
+        data(){
+            return{
+                categories: Array(),
+            }
+        },
+        created(){
+            $.ajax({
+                method: 'post',
+                url: '/api/getCategories'
+            }).done((response) => {
+                this.categories = response;
+            }).fail((response) => {
+                console.log(response);
+            })
+        }
     }
 </script>
 

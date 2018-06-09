@@ -13,16 +13,13 @@ class StateRepository extends ServiceEntityRepository
         parent::__construct($registry, State::class);
     }
 
-    /*
-    public function findBySomething($value)
-    {
-        return $this->createQueryBuilder('s')
-            ->where('s.something = :value')->setParameter('value', $value)
-            ->orderBy('s.id', 'ASC')
-            ->setMaxResults(10)
+    public function getStatesByCountry($id){
+        $states = $this->createQueryBuilder('s')
+            ->select('s.id, s.name')
+            ->where('s.country = :country_id')->setParameter('country_id', $id)
             ->getQuery()
-            ->getResult()
-        ;
+            ->getResult();
+
+        return $states;
     }
-    */
 }

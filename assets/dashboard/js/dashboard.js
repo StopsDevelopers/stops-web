@@ -40,10 +40,21 @@ const router = new VueRouter({
 const data = {
     business: {
         register: {
-            name: '',
+            businessName: '',
             branch: '',
-            category: '',
-            subcategory: []
+            category: 0,
+            subcategory: [],
+            owner: '',
+            rfc: '',
+            country: 0,
+            state: 0,
+            city: 0,
+            street: '',
+            neighborhood: '',
+            exteriorNumber: '',
+            interiorNumber: '', 
+            zip: '',
+            sendEmail: false,
         }
     }
 }

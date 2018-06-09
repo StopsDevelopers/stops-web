@@ -2,29 +2,65 @@
 
 namespace App\Controller;
 
+use App\Entity\Category;
+use App\Entity\City;
+use App\Entity\Country;
+use App\Entity\State;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class BusinessController extends Controller
 {
-    public function index()
-    {
-        // replace this line with your own code!
-        return $this->render('business.html.twig');
+    /**
+     * @Route("/api/getCategories", name="get_categories")
+     */
+    public function getCategories(){
+        $categories = $this->getDoctrine()
+            ->getRepository(Category::class)
+            ->getCategories();
+
+        return $this->json($categories);
+    }
+    /**
+     * @Route("/api/getCountries", name="get_countries")
+     */
+    public function getAllCountries(){
+        $countries = $this->getDoctrine()
+            ->getRepository(Country::class)
+            ->getCountries();
+
+        return $this->json($countries);
     }
 
-    public function register($number){
-        switch ($number){
-            case 1:
-                return $this->render('business-step-one.html.twig');
-                break;
-            case 2:
-                return $this->render('business-step-two.html.twig');
-                break;
-            case 3:
-                return $this->render('business-step-three.html.twig');
-                break;
+    /**
+     * @Route("/api/getStates", name="get_states")
+     */
+    public function getStates(Request $request){
+        if ($request->isMethod("POST")){
+            $id = $request->request->get('country');
+
+            $states = $this->getDoctrine()
+                ->getRepository(State::class)
+                ->getStatesByCountry($id);
+
+            return $this->json($states);
+        }
+    }
+
+    /**
+     * @Route("/api/getCities", name="get_cities")
+     */
+    public function getCities(Request $request){
+        if ($request->isMethod("POST")){
+            $id = $request->request->get('state');
+
+            $cities = $this->getDoctrine()
+                ->getRepository(City::class)
+                ->getCitiesByState($id);
+
+            return $this->json($cities);
         }
     }
 }
