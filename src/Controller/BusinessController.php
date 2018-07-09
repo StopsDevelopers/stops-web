@@ -10,6 +10,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Braintree;
 
 class BusinessController extends Controller
 {
@@ -62,5 +63,16 @@ class BusinessController extends Controller
 
             return $this->json($cities);
         }
+    }
+
+    /**
+     * @Route("/api/getPaypalAccessToken", name="get_paypal_at")
+     */
+    public function getPaypalAccessToken(){
+        $gateway = new \Braintree_Gateway(array(
+            'accessToken' => 'access_token$sandbox$pkzrhbm32q89hh2w$084c0e011e0bcbb061398be9ffdffaa3'
+        ));
+
+        return $this->json($gateway->clientToken()->generate());
     }
 }

@@ -80,9 +80,18 @@
             <div id="account" class="mt-5 mb-3" v-else-if="method == 'PAGO_CON_PAYPAL'">
                 <div class="form-row">
                     <div class="col-8 d-flex justify-content-center">
-                        <button class="btn btn-link btn-lg">
+                        <!--button class="btn btn-link btn-lg">
                             Continuar con <img src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/PP_logo_h_150x38.png" alt="PayPal Logo">
-                        </button>
+                        </button-->
+                        <paypal-checkout amount="10.00"
+                                         currency="USD"
+                                         env="sandbox"
+                                         :client="credentials"
+                                         :braintree="braintreeSDK"
+                                         v-on:payment-authorized="paymentAuthorized"
+                                         v-on:payment-completed="paymentCompleted"
+                                         v-on:payment-cancelled="paymentCancelled">
+                        </paypal-checkout>
                     </div>
                 </div>
                 <div class="form-row mb-3">
@@ -106,18 +115,47 @@
 </template>
 
 <script>
+    import PaypalCheckout from 'vue-paypal-checkout';
+    import Braintree from 'braintree-web';
     import BusinessRegister from './../components/business-register';
 
     export default {
         name: "business-register-three",
         components: {
+            PaypalCheckout,
             BusinessRegister
+        },
+        methods: {
+            paymentAuthorized: (data) => {
+                console.log(data);
+            },
+            paymentCompleted: (data) => {
+                console.log(data);
+            },
+            paymentCancelled: (data) => {
+                console.log(data);
+            }
         },
         data(){
             return{
                 method: String,
-                conditions: Boolean
+                conditions: Boolean,
+                credentials: {
+                    sandbox: ''
+                },
+                braintreeSDK: Braintree
             }
+        },
+        beforeMount(){
+            $.ajax({
+                method: 'POST',
+                url: '/api/getPaypalAccessToken',
+                dataType: 'json'
+            }).done((response) => {
+                this.credentials.sandbox = response;
+            }).fail((response) => {
+                console.log(response);
+            })
         }
     }
 </script>

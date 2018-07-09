@@ -1,4 +1,4 @@
-<template>
+ºº<template>
     <view-content sectionIcon="fa-user" sectionName="Perfil">
         <section class="mb-4">
             <p class="text-muted mb-3">Información personal</p>
